@@ -1,102 +1,33 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produk UMKM RUMUS</title>
+@extends('layouts.app')
 
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+@section('title', 'Produk Unggulan RUMUS')
 
-  <!-- CSS pisah -->
-  <link rel="stylesheet" href="{{ asset('css/produk.css') }}">
-</head>
-<body>
-<div class="produk">
+@section('content')
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold orange-text">Produk Unggulan</h1>
+        <p class="text-gray-600 mt-2">Temukan berbagai produk unggulan dari UMKM Desa Bumi Jaya</p>
+    </div>
 
-  @include('navigasi')
-
-  @php
-    /* Controller mengirim $owners (collection Umkm) lengkap dengan:
-       - $owner->nama_pemilik
-       - $owner->produks (max 2 utk tiap baris di layout contoh)
-       - setiap $produk punya: nama, deskripsi_singkat, legalitas (opsional),
-         relasi ->linksMarketplace (platform, url), dan ->gambarProduk (is_cover)
-    */
-  @endphp
-
-  {{-- ============ BAGIAN 1: BARIS ATAS (Owner 1) ============ --}}
-  @if(($owners[0] ?? null))
-    <div class="owner-badge"><span>{{ $owners[0]->nama_pemilik }}</span></div>
-    <section class="grid">
-      @foreach(($owners[0]->produks ?? collect())->take(2) as $p)
-        @php
-          $cover = optional(($p->gambarProduk ?? collect())->firstWhere('is_cover',1))?->path
-                   ?? optional(($p->gambarProduk ?? collect())->first())?->path
-                   ?? 'images/produk-placeholder.png';
-
-          $shopee = optional(($p->linksMarketplace ?? collect())->firstWhere('platform','shopee'))?->url;
-          $tiktok = optional(($p->linksMarketplace ?? collect())->firstWhere('platform','tiktok'))?->url;
-        @endphp
-
-        <article class="card">
-          <div class="card__media">
-            <img src="{{ asset($cover) }}" alt="{{ $p->nama }}">
-          </div>
-          <div class="card__body">
-            <h3 class="card__title">{{ $p->nama }}</h3>
-            <p class="card__desc">{{ $p->deskripsi_singkat ?? '—' }}</p>
-
-            <div class="card__label">Legalitas :</div>
-            <p class="card__meta">{{ $p->legalitas ?? 'Sertifikasi halal, NIB' }}</p>
-
-            <div class="card__actions">
-              <a class="btn btn--shopee {{ $shopee ? '' : 'is-disabled' }}" href="{{ $shopee ?? '#' }}" target="_blank" rel="noopener">Shopee</a>
-              <a class="btn btn--tiktok {{ $tiktok ? '' : 'is-disabled' }}" href="{{ $tiktok ?? '#' }}" target="_blank" rel="noopener">Tiktok</a>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        @foreach($produk as $item)
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+            <img src="{{ $item->gambar ? asset('storage/'.$item->gambar) : asset('images/placeholder/produk.jpg') }}"
+                 alt="{{ $item->nama }}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-semibold mb-2">{{ $item->nama }}</h3>
+                <p class="text-gray-700 mb-2">{{ Str::limit($item->deskripsi, 50) }}</p>
+                <p class="text-orange-primary font-bold">Rp. {{ number_format($item->harga, 0, ',', '.') }}</p>
+                <div class="mt-3">
+                    <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">{{ $item->kategori }}</span>
+                </div>
             </div>
-          </div>
-        </article>
-      @endforeach
-    </section>
-  @endif
+        </div>
+        @endforeach
+    </div>
 
-  {{-- ============ BAGIAN 2: BARIS BAWAH (Owner 2) ============ --}}
-  @if(($owners[1] ?? null))
-    <div class="owner-badge owner-badge--spaced"><span>{{ $owners[1]->nama_pemilik }}</span></div>
-    <section class="grid">
-      @foreach(($owners[1]->produks ?? collect())->take(2) as $p)
-        @php
-          $cover = optional(($p->gambarProduk ?? collect())->firstWhere('is_cover',1))?->path
-                   ?? optional(($p->gambarProduk ?? collect())->first())?->path
-                   ?? 'images/produk-placeholder.png';
-
-          $shopee = optional(($p->linksMarketplace ?? collect())->firstWhere('platform','shopee'))?->url;
-          $tiktok = optional(($p->linksMarketplace ?? collect())->firstWhere('platform','tiktok'))?->url;
-        @endphp
-
-        <article class="card">
-          <div class="card__media">
-            <img src="{{ asset($cover) }}" alt="{{ $p->nama }}">
-          </div>
-          <div class="card__body">
-            <h3 class="card__title">{{ $p->nama }}</h3>
-            <p class="card__desc">{{ $p->deskripsi_singkat ?? '—' }}</p>
-
-            <div class="card__label">Legalitas :</div>
-            <p class="card__meta">{{ $p->legalitas ?? 'Sertifikasi halal, NIB' }}</p>
-
-            <div class="card__actions">
-              <a class="btn btn--shopee {{ $shopee ? '' : 'is-disabled' }}" href="{{ $shopee ?? '#' }}" target="_blank" rel="noopener">Shopee</a>
-              <a class="btn btn--tiktok {{ $tiktok ? '' : 'is-disabled' }}" href="{{ $tiktok ?? '#' }}" target="_blank" rel="noopener">Tiktok</a>
-            </div>
-          </div>
-        </article>
-      @endforeach
-    </section>
-  @endif
-
+    <div class="mt-8">
+        {{ $produk->links() }}
+    </div>
 </div>
-</body>
-</html>
+@endsection
