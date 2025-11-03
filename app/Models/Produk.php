@@ -64,8 +64,8 @@ class Produk extends Model
     public function getCoverUrlAttribute(): ?string
     {
         $cover = $this->coverImage()->first();
-        if ($cover) return asset('storage/' . $cover->path);
+        if ($cover) return asset('storage/' . $cover->path_gambar);
         $first = $this->gambar()->orderBy('urutan')->first();
-        return $first ? asset('storage/' . $first->path) : null;
+        return $first ? asset('storage/' . $first->path_gambar) : null;
     }
 }

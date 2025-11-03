@@ -9,7 +9,9 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Produk::latest()->paginate(8);
+        // Ambil produk + relasi gambar
+        $produk = Produk::with('gambar', 'kategori')->latest()->paginate(8);
+
         return view('produk.index', compact('produk'));
     }
 }

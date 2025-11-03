@@ -17,6 +17,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Toggle;
 use App\Filament\Resources\Produks\Pages\EditProduk;
 use App\Filament\Resources\Produks\Pages\ViewProduk;
 use App\Filament\Resources\Produks\Pages\ListProduks;
@@ -38,49 +40,61 @@ class ProdukResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-            return $schema->schema([
-                Textarea::make('nama_produk')
-                    ->label('Nama Produk')
-                    ->required(),
+        return $schema->schema([
+            Textarea::make('nama_produk')
+                ->label('Nama Produk')
+                ->required(),
 
-                Textarea::make('kode_produk')
-                    ->label('Kode Produk')
-                    ->required(),
+            Textarea::make('kode_produk')
+                ->label('Kode Produk')
+                ->required(),
 
-                Select::make('id_umkm')
-                    ->label('UMKM')
-                    ->relationship('umkm', 'nama_umkm')
-                    ->required(),
+            Select::make('id_umkm')
+                ->label('UMKM')
+                ->relationship('umkm', 'nama_umkm')
+                ->required(),
 
-                Select::make('id_kategori')
-                    ->label('Kategori')
-                    ->relationship('kategori', 'nama')
-                    ->required(),
+            Select::make('id_kategori')
+                ->label('Kategori')
+                ->relationship('kategori', 'nama')
+                ->required(),
 
-                Textarea::make('deskripsi_lengkap')
-                    ->label('Deskripsi Lengkap')
-                    ->rows(5)
-                    ->columnSpanFull(),
+            Textarea::make('deskripsi_lengkap')
+                ->label('Deskripsi Lengkap')
+                ->rows(5)
+                ->columnSpanFull(),
 
-                TextInput::make('deskripsi_singkat')
-                    ->label('Deskripsi Singkat')
-                    ->maxLength(255)
-                    ->required()
-                    ->columnSpanFull(),
+            TextInput::make('deskripsi_singkat')
+                ->label('Deskripsi Singkat')
+                ->maxLength(255)
+                ->required()
+                ->columnSpanFull(),
 
-                TextInput::make('harga')
-                    ->label('Harga')
-                    ->numeric()
-                    ->required(),
+            TextInput::make('harga')
+                ->label('Harga')
+                ->numeric()
+                ->required(),
 
-                FileUpload::make('attachments')
-                    ->label('Lampiran Produk')
-                    ->image()
-                    ->multiple()
-                    ->directory('produk-attachments')
-                    ->reorderable()
-                    ->maxFiles(5),
-            ]);
+            // 🧩 Bagian baru untuk relasi ke tabel gambar_produks
+            Repeater::make('gambar')
+                ->label('Gambar Produk')
+                ->relationship('gambar') // relasi hasMany di model Produk
+                ->schema([
+                    FileUpload::make('path_gambar')
+                        ->label('Gambar Produk')
+                        ->image()
+                        ->directory('produk')
+                        ->disk('public')
+                        ->visibility('public')
+                        ->required(),
+                    Toggle::make('is_cover')
+                        ->label('Jadikan Cover')
+                        ->default(false),
+                ])
+                ->collapsible()
+                ->createItemButtonLabel('Tambah Gambar')
+                ->columns(2),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -88,31 +102,36 @@ class ProdukResource extends Resource
         return $table->columns([
             TextColumn::make('nama_produk')
                 ->label('Nama Produk'),
+
             TextColumn::make('kode_produk')
                 ->label('Kode Produk'),
+
             TextColumn::make('deskripsi_lengkap')
                 ->label('Deskripsi Lengkap'),
+
             TextColumn::make('deskripsi_singkat')
                 ->label('Deskripsi Singkat'),
+
             TextColumn::make('harga')
                 ->label('Harga'),
-            ImageColumn::make('attachments')
-                    ->label('Lampiran Produk')
-                    ->square()
-                    ->toggleable(),
 
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
+            // 🖼️ Ambil cover image dari relasi gambar_produks
+            ImageColumn::make('gambar.path_gambar')
+                ->label('Cover')
+                ->circular()
+                ->toggleable(),
+        ])
+        ->filters([
+            //
+        ])
+        ->recordActions([
+            ViewAction::make(),
+            EditAction::make(),
+        ])
+        ->toolbarActions([
+            BulkActionGroup::make([
                 DeleteBulkAction::make(),
-                ]),
+            ]),
         ]);
     }
 
