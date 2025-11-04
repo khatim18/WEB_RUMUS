@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class GambarProduk extends Model
 {
-     protected $table = 'gambar_produks';
-    protected $primaryKey = 'id_gambar';
+    use HasFactory;
 
-    protected $fillable = ['id_produk','path_gambar','is_cover','urutan'];
+    protected $table = 'gambar_produks';
+    protected $fillable = ['id_produk', 'path_gambar', 'is_cover'];
 
-    public function produk() {
-       return $this->belongsTo(\App\Models\Produk::class, 'id_produk', 'id_produk');
+    public function produk()
+    {
+        return $this->belongsTo(Produk::class, 'id_produk');
     }
 }
