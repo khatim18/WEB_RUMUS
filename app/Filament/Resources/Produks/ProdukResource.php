@@ -23,6 +23,7 @@ use App\Filament\Resources\Produks\Pages\EditProduk;
 use App\Filament\Resources\Produks\Pages\ViewProduk;
 use App\Filament\Resources\Produks\Pages\ListProduks;
 use App\Filament\Resources\Produks\Pages\CreateProduk;
+use Filament\Actions\DeleteAction;
 
 class ProdukResource extends Resource
 {
@@ -43,42 +44,49 @@ class ProdukResource extends Resource
         return $schema->schema([
             Textarea::make('nama_produk')
                 ->label('Nama Produk')
+                ->placeholder('Contoh: Risol Jamur Tiram')
                 ->required(),
 
             Textarea::make('kode_produk')
                 ->label('Kode Produk')
+                ->placeholder('Contoh: PRD-001')
                 ->required(),
 
             Select::make('id_umkm')
                 ->label('UMKM')
                 ->relationship('umkm', 'nama_umkm')
+                ->placeholder('Pilih UMKM')
                 ->required(),
 
             Select::make('id_kategori')
                 ->label('Kategori')
                 ->relationship('kategori', 'nama')
+                ->placeholder('Pilih Kategori')
                 ->required(),
 
             Textarea::make('deskripsi_lengkap')
                 ->label('Deskripsi Lengkap')
+                ->placeholder('Deskripsikan produk secara detail...')
                 ->rows(5)
                 ->columnSpanFull(),
 
             TextInput::make('deskripsi_singkat')
                 ->label('Deskripsi Singkat')
+                ->placeholder('Deskripsi singkat produk')
                 ->maxLength(255)
                 ->required()
                 ->columnSpanFull(),
 
             TextInput::make('harga')
                 ->label('Harga')
+                ->placeholder('Contoh: 150000')
                 ->numeric()
                 ->required(),
 
-            // 🧩 Bagian baru untuk relasi ke tabel gambar_produks
+
             Repeater::make('gambar')
                 ->label('Gambar Produk')
-                ->relationship('gambar') // relasi hasMany di model Produk
+                ->relationship('gambar')
                 ->schema([
                     FileUpload::make('path_gambar')
                         ->label('Gambar Produk')
@@ -127,6 +135,7 @@ class ProdukResource extends Resource
         ->recordActions([
             ViewAction::make(),
             EditAction::make(),
+            DeleteAction::make(),
         ])
         ->toolbarActions([
             BulkActionGroup::make([

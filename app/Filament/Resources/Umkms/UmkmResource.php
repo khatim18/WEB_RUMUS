@@ -8,8 +8,8 @@ use Filament\Tables\Table;
 use Filament\Schemas\Schema;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Resource;
-use Filament\Support\Icons\Heroicon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\Textarea;
@@ -38,10 +38,22 @@ class UmkmResource extends Resource
 
     public static function form(Schema $schema): Schema{
         return $schema->schema([
-            TextInput::make('nama_umkm')->required(),
-            TextInput::make('nama_pemilik'),
-            TextInput::make('no_hp'),
-            Textarea::make('deskripsi'),
+            TextInput::make('nama_umkm')
+                    ->label('Nama UMKM')
+                    ->required()
+                    ->placeholder('Contoh: Risol Jamur Tiram'),
+            TextInput::make('nama_pemilik')
+                    ->label('Nama Pemilik')
+                    ->required()
+                    ->placeholder('Contoh: Imam Wahyudi'),
+            TextInput::make('no_hp')
+                    ->label('Nomor HP')
+                    ->required()
+                    ->placeholder('Contoh: 081234567890'),
+            Textarea::make('deskripsi')
+                    ->label('Deskripsi UMKM')
+                    ->required()
+                    ->placeholder('Contoh: Produksi risol dengan bahan jamur tiram segar...'),
         ]);
     }
 
@@ -49,10 +61,8 @@ class UmkmResource extends Resource
         return $table->columns([
             TextColumn::make('nama_umkm')
                 ->label('UMKM'),
-            TextColumn::make('nama_pemilik')
-                ->label('Nama Pemilik'),
-            TextColumn::make('no_hp')
-                ->label('No Hp'),
+            TextColumn::make('nama_pemilik'),
+            TextColumn::make('no_hp'),
             TextColumn::make('deskripsi')
                 ->label('Deskripsi'),
 
@@ -63,6 +73,7 @@ class UmkmResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 ViewAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -7,7 +7,12 @@ use BackedEnum;
 use App\Models\Legalitas;
 use Filament\Tables\Table;
 use Filament\Schemas\Schema;
+use Filament\Actions\ViewAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -16,8 +21,6 @@ use App\Filament\Resources\Legalitas\Pages\EditLegalitas;
 use App\Filament\Resources\Legalitas\Pages\ListLegalitas;
 use App\Filament\Resources\Legalitas\Pages\ViewLegalitas;
 use App\Filament\Resources\Legalitas\Pages\CreateLegalitas;
-use App\Filament\Resources\Legalitas\Schemas\LegalitasForm;
-use App\Filament\Resources\Legalitas\Tables\LegalitasTable;
 use App\Filament\Resources\Legalitas\Schemas\LegalitasInfolist;
 
 class LegalitasResource extends Resource
@@ -30,7 +33,7 @@ class LegalitasResource extends Resource
 
     protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-clipboard-document-check';
 
-    protected static ?string $recordTitleAttribute = 'Nama_Legalitas';
+    protected static ?string $recordTitleAttribute = 'nama_legalitas';
 
     protected static ?string $navigationLabel = 'Legalitas';
 
@@ -41,17 +44,24 @@ class LegalitasResource extends Resource
                     ->label('Nama Legalitas')
                     ->placeholder('Contoh: NIB, PIRT, Sertifikat Halal, BPOM')
                     ->required()
+                    ->unique()
                     ->maxLength(100),
 
                 Textarea::make('slug')
+                    ->label('Slug')
+                    ->placeholder('Contoh: nib-pirt-sertifikat-halal-bpom')
                     ->required()
                     ->unique(),
 
                 Textarea::make('penerbit')
-                    ->label('Penerbit'),
+                    ->label('Penerbit')
+                    ->placeholder('Contoh: BPOM, Dinas Kesehatan, MUI')
+                    ->required(),
 
                 Textarea::make('deskripsi')
-                    ->label('deskripsi')
+                    ->label('Deskripsi')
+                    ->placeholder('Contoh: Legalitas ini diterbitkan oleh...')
+                    ->required()
                     ->rows(5)
                     ->columnSpanFull(),
 
@@ -59,6 +69,8 @@ class LegalitasResource extends Resource
                     ->label('Gambar Sertifikat')
                     ->image()
                     ->directory('legalitas')
+                    ->preserveFilenames()
+                    ->visibility('public')
                     ->nullable(),
             ]);
     }
@@ -75,6 +87,19 @@ class LegalitasResource extends Resource
             TextColumn::make('slug'),
             TextColumn::make('penerbit'),
             ImageColumn::make('lampiran'),
+        ])
+        ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+                ViewAction::make(),
+                DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                DeleteBulkAction::make(),
+                ]),
         ]);
 
     }

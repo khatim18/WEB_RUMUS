@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -15,10 +16,10 @@ return new class extends Migration
             $table->id('id_link');
             $table->unsignedBigInteger('id_produk');
             $table->string('nama_marketplace');
-            $table->string('url',225);
-            $table->boolean('is_active')->default(true); 
+            $table->string('url')->change();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
-
+            $table->string('icon');
             $table->foreign('id_produk')
                   ->references('id_produk')
                   ->on('produks')

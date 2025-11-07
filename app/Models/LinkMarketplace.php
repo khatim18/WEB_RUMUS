@@ -17,6 +17,7 @@ class LinkMarketplace extends Model
         'nama_marketplace',
         'url',
         'is_active',
+        'icon',
     ];
 
     /**

@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('penerbit')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->string('lampiran')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Produk extends Model
 {
@@ -20,7 +21,6 @@ class Produk extends Model
         'id_umkm',
         'id_admin',
         'nama_produk',
-        'slug',
         'kode_produk',
         'deskripsi_singkat',
         'deskripsi_lengkap',
@@ -41,9 +41,9 @@ class Produk extends Model
 
     public function legalitas()
     {
-        return $this->belongsToMany(Legalitas::class, 'produk_legalitas')
-            ->withPivot(['nomor_sertifikat','tanggal_terbit','tanggal_kadaluwarsa'])
-            ->withTimestamps();
+    return $this->belongsToMany(Legalitas::class, 'produk_legalitas', 'id_produk', 'id_legalitas')
+
+        ->withTimestamps();
     }
 
     public function gambar()

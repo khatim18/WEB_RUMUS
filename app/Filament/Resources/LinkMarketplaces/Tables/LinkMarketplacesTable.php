@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Forms\Components\FileUpload;
 
 class LinkMarketplacesTable
 {
@@ -21,7 +22,14 @@ class LinkMarketplacesTable
                 TextColumn::make('nama_marketplace')
                     ->searchable(),
                 TextColumn::make('link')
-                    ->searchable(),
+                    ->searchable()
+                    ->openUrlInNewTab()
+                    ->url(fn ($record) => $record->url, true),
+                TextColumn::make('')
+                    ->multiple('icon')
+                    ->default('🛒')
+                    ->dehydrated(false)
+                    ->nullabel(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

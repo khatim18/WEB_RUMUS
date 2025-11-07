@@ -4,6 +4,7 @@ namespace App\Filament\Resources\LinkMarketplaces\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\FileUpload;
 
 class LinkMarketplaceForm
 {
@@ -17,6 +18,9 @@ class LinkMarketplaceForm
                 TextInput::make('nama_marketplace')
                     ->required(),
                 TextInput::make('link')
+                    ->required(),
+                FileUpload::make('icon')
+                    ->multiple()
                     ->required(),
             ]);
     }

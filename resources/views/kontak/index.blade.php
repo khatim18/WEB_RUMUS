@@ -21,7 +21,7 @@
                         </div>
                         <div>
                             <h3 class="font-semibold mb-1">Alamat</h3>
-                            <p class="text-gray-700">Jl. Desa Bumi Jaya No. 123, Kec. Bumi Jaya, Kab. Tangerang, Banten 15510</p>
+                            <p class="text-gray-700">Jl. Desa Bumi Jaya No. 123, Kec. Bumi Jaya, Kab. JAWA, PPK Jawa 15510</p>
                         </div>
                     </div>
 

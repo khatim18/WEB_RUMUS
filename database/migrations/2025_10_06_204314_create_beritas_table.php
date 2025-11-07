@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id('id_berita');
             $table->string('judul');
+            $table->string('slug')->nullable()->unique();
             $table->text('deskripsi_singkat')->nullable();
             $table->text('isi_berita')->nullable();
-            $table->string('jenis')->nullable(); 
+            $table->string('jenis')->nullable();
             $table->string('penulis')->nullable();
             $table->date('tanggal')->nullable();
             $table->string('gambar')->nullable();
@@ -24,11 +25,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('beritas');
-    }
-};
+        public function down()
+        {
+            Schema::table('beritas', function (Blueprint $table) {
+                $table->dropColumn('slug');
+            });
+        }
+    };

@@ -13,21 +13,8 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\KisahController;
 use App\Http\Controllers\GaleriController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Ini adalah file route utama untuk aplikasi Laravel kamu.
-| Kamu bisa menambahkan route baru di bawah sesuai kebutuhan.
-|
-*/
-
 // Halaman utama
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-Route::get('/umkm', [FrontendController::class, 'umkm'])->name('umkm');Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 //kisah
 Route::get('/kisah', [KisahController::class, 'index'])->name('kisah.index');
@@ -41,6 +28,7 @@ Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.in
 
 // Produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+Route::get('/produk/{id_produk}', [ProdukController::class, 'show'])->name('produk.show');
 
 // Tentang
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang.index');
@@ -55,3 +43,10 @@ Route::get('/umkm/{id}', [UMKMController::class, 'detail'])->name('umkm.detail')
 
 // Kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+
+// Berita
+Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
+Route::get('/berita/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
+
+//
+Route::get('/daftar-umkm', [FrontendController::class, 'umkm'])->name('frontend.umkm');

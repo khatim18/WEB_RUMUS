@@ -6,29 +6,21 @@ use App\Filament\Resources\LinkMarketplaces\Pages\CreateLinkMarketplace;
 use App\Filament\Resources\LinkMarketplaces\Pages\EditLinkMarketplace;
 use App\Filament\Resources\LinkMarketplaces\Pages\ListLinkMarketplaces;
 use App\Filament\Resources\LinkMarketplaces\Pages\ViewLinkMarketplace;
-use App\Filament\Resources\LinkMarketplaces\Schemas\LinkMarketplaceForm;
 use App\Filament\Resources\LinkMarketplaces\Schemas\LinkMarketplaceInfolist;
-use App\Filament\Resources\LinkMarketplaces\Tables\LinkMarketplacesTable;
 use App\Models\LinkMarketplace;
 use BackedEnum;
 use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
-use App\Filament\Resources\LinkMarketplaceResource\Pages;
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Tables\Actions;
-use Filament\Tables\Filters;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Actions\ViewAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-
-
-
 
 class LinkMarketplaceResource extends Resource
 {
@@ -66,7 +58,27 @@ class LinkMarketplaceResource extends Resource
             Forms\Components\Toggle::make('is_active')
                     ->label('Aktif')
                     ->default(true),
-        ]);
+
+            Forms\Components\Select::make('icon_placeholder')
+                ->label('Ikon Marketplace (hanya tampilan)')
+                ->options([
+                    'shopee.svg' => 'Shopee',
+                    'tokopedia.png' => 'Tokopedia',
+                    'tiktok.svg' => 'TikTok',
+                    'lazada.png' => 'Lazada',
+                ])
+                ->default('shopee.svg')
+                ->helperText('Ikon ini tidak disimpan ke database.'),
+
+            Forms\Components\FileUpload::make('icon')
+                ->label('Ikon Marketplace (tidak disimpan)')
+                ->image()
+                ->directory('marketplace-icons')
+                ->maxSize(1024)
+                ->helperText('Hanya untuk tampilan, tidak disimpan ke database.')
+                ->dehydrated(false),
+
+                ]);
     }
 
     public static function infolist(Schema $schema): Schema
@@ -98,10 +110,27 @@ class LinkMarketplaceResource extends Resource
                     ->url(fn ($record) => $record->url, true)
                     ->limit(40),
 
+                Tables\Columns\ImageColumn::make('icon')
+                        ->label('Ikon Marketplace')
+                        ->getStateUsing(function ($record) {
+                            $name = strtolower($record->nama_marketplace);
+                            $icons = [
+                                'shopee' => asset('marketplace-icons/shopee.svg'),
+                                'tokopedia' => asset('marketplace-icons/tokopedia.png'),
+                                'tiktok' => asset('marketplace-icons/tiktok.svg'),
+                                'lazada' => asset('marketplace-icons/lazada.png'),
+                            ];
+                            // Ambil ikon sesuai nama marketplace, kalau tidak ada pakai default
+                            $iconFile = $icons[$name] ?? 'marketplace-icons/default.svg';
+                            // Pastikan path menggunakan asset() biar bisa tampil di browser
+                            return asset($iconFile);
+                        }),
+
+
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label('Aktif')
-                    ->boolean(),
-        ])
+                        ->label('Aktif')
+                        ->boolean(),
+                ])
          ->filters([
             TernaryFilter::make('is_active')
                 ->label('Status Aktif'),

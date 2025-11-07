@@ -14,8 +14,19 @@ class BeritaController extends Controller
     }
 
     public function show($slug)
-    {
-        $berita = Berita::where('slug', $slug)->firstOrFail();
-        return view('berita.show', compact('berita'));
-    }
+   {
+    // Ubah slug jadi judul (misalnya "pelatihan-umkm" => "Pelatihan UMKM")
+    $judul = str_replace('-', ' ', $slug);
+
+    // Cari berita berdasarkan judul (case-insensitive)
+    $item = Berita::whereRaw('LOWER(judul) = ?', [strtolower($judul)])->firstOrFail();
+
+    // Ambil berita lain untuk ditampilkan di bawah
+    $beritaLainnya = Berita::where('id_berita', '!=', $item->id_berita)
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('berita.show', compact('item', 'beritaLainnya'));
+}
 }

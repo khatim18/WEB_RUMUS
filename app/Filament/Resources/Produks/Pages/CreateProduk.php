@@ -6,6 +6,7 @@ use App\Filament\Resources\Produks\ProdukResource;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
 use App\Models\GambarProduk;
+use Filament\Notifications\Notification;
 
 
 class CreateProduk extends CreateRecord
@@ -26,7 +27,7 @@ class CreateProduk extends CreateRecord
     {
         $record = $this->record; // produk yang baru dibuat
 
-        
+
         if (isset($this->data['attachments'])) {
             foreach ($this->data['attachments'] as $filePath) {
                 GambarProduk::create([
@@ -36,5 +37,16 @@ class CreateProduk extends CreateRecord
                 ]);
             }
         }
+    }
+    protected function getRedirectUrl(): string
+    {
+        // (Opsional) tampilkan notifikasi sukses
+        Notification::make()
+            ->title('Produk berhasil ditambahkan!')
+            ->success()
+            ->send();
+
+        // Arahkan ke halaman list produk
+        return $this->getResource()::getUrl('index');
     }
 }

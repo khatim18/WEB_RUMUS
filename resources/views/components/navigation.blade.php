@@ -1,7 +1,6 @@
 @php
     use Illuminate\Support\Facades\Request;
 @endphp
-
 <nav class="orange-primary shadow-lg sticky top-0 z-50">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-3">
@@ -52,6 +51,7 @@
                     <div class="absolute left-0 mt-1 pt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <a href="{{ route('galeri.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-orange-100">Galeri</a>
                         <a href="{{ route('berita.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-orange-100">Berita</a>
+                        <a href="{{ route('kegiatan.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-orange-100">Kegiatan Rumus</a>
                         <a href="{{ route('kisah.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-orange-100">Kisah Sukses</a>
                         <a href="{{ route('kegiatan.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-orange-100">Motivasi</a>
                     </div>
@@ -63,6 +63,13 @@
                     {{ Request::is('kontak*') ? 'after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white' : '' }}">
                     Kontak
                 </a>
+
+                <!-- tombol login -->
+                <a href="{{ route('filament.admin.auth.login') }}"
+                    class="border-0.5 border-white text-white bg-orange-500 hover:bg-orange-600
+                    font-semibold px-4 py-2  rounded-full transition duration-300 shadow-md">
+                Login
+            </a>
             </div>
 
             <!-- MOBILE MENU TOGGLE -->
@@ -92,6 +99,7 @@
                 <a href="{{ route('galeri.index') }}" class="block py-2 text-white hover:text-gray-200">Galeri</a>
                 <a href="{{ route('kontak.index') }}" class="block py-2 text-white hover:text-gray-200">Kontak</a>
             </div>
+
         </div>
     </div>
 </nav>

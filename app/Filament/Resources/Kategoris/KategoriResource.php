@@ -37,15 +37,8 @@ class KategoriResource extends Resource
         return $schema->schema([
                 Textarea::make('nama')
                     ->label('Nama')
+                    ->placeholder('Contoh: Makanan Ringan...')
                     ->maxLength(255),
-
-                Textarea::make('slug')
-                    ->required()
-                    ->unique(),
-
-                Textarea::make('deskripsi')
-                    ->label('Deskripsi')
-                    ->rows(5),
             ]);
 
 

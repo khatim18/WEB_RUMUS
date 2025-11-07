@@ -12,11 +12,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $berita = Berita::latest()->take(3)->get();
-        $kegiatan = Kegiatan::latest()->take(3)->get();
-        $produk = Produk::latest()->take(4)->get();
-        $umkm = UMKM::latest()->take(3)->get();
+        $beritas = Berita::latest()->take(3)->get();
+        $kegiatans = Kegiatan::latest()->take(3)->get();
+        $produks = Produk::with(['gambar','kategori','links'])->latest()->paginate(4);
+        $umkms = UMKM::latest()->take(3)->get();
 
-        return view('home.index', compact('berita', 'kegiatan', 'produk', 'umkm'));
+        return view('home.index', compact('beritas', 'kegiatans', 'produks', 'umkms'));
     }
 }

@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Legalitas\Pages;
 use App\Filament\Resources\Legalitas\LegalitasResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 
 class ListLegalitas extends ListRecords
 {
