@@ -27,3 +27,42 @@
     background-color: #f9f9f9;
     border-top: 1px solid #f0f0f0;
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+
+/* Container untuk memusatkan card */
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    /* Menengahkan card secara horizontal */
+    gap: 20px;
+    /* Jarak antar card */
+    flex-wrap: wrap;
+    /* Membungkus baris jika layar kecil */
+}
+
+
+/* Styling untuk setiap card */
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    width: 250px;
+    /* Lebar card yang konsisten */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -96,7 +96,7 @@
 
 
         {{-- Galeri --}}
-        <h3 class="text-xl font-bold text-gray-900 mb-3">Galeri</h3>
+        <h3 class="text-xl font-bold text-gray-900 mb-3">Gambar</h3>
         <div class="flex gap-4 overflow-x-auto pb-2">
             @foreach($produk->gambar as $g)
                 <img src="{{ asset('storage/' . $g->path_gambar) }}"
