@@ -88,16 +88,16 @@ class ProdukResource extends Resource
                 ->label('Gambar Produk')
                 ->relationship('gambar')
                 ->schema([
-                    FileUpload::make('path_gambar')
-                        ->label('Gambar Produk')
-                        ->image()
-                        ->directory('produk')
-                        ->disk('public')
-                        ->visibility('public')
-                        ->required(),
-                    Toggle::make('is_cover')
-                        ->label('Jadikan Cover')
-                        ->default(false),
+            FileUpload::make('path_gambar')
+                ->image()
+                ->label('Gambar Produk')
+                ->disk('public')
+                ->directory('produk')
+                ->visibility('public')
+                ->required(),
+            Toggle::make('is_cover')
+                ->label('Jadikan Cover')
+                ->default(false),
                 ])
                 ->collapsible()
                 ->createItemButtonLabel('Tambah Gambar')

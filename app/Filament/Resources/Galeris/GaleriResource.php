@@ -47,11 +47,19 @@ class GaleriResource extends Resource
                 ->required(),
             DatePicker::make('tanggal')
                 ->label('Tanggal Kegiatan'),
-            Textarea::make('deskripsi'),
+            TextInput::make('penyelenggara')
+                ->default(null)
+                ->required(),
+            Textarea::make('deskripsi')
+                ->default(null)
+                ->columnSpanFull()
+                ->required(),
             FileUpload::make('gambar')
                 ->label('Foto Kegiatan')
                 ->directory('galeri')
                 ->image()
+                ->disk('public')
+                ->visibility('public')
                 ->required(),
         ]);
     }
@@ -63,13 +71,26 @@ class GaleriResource extends Resource
 
     public static function table(Table $table): Table
     {
-       return $table
-            ->columns([
-                TextColumn::make('judul'),
+       return $table -> columns([
+                TextColumn::make('judul')
+                    ->label('Judul Kegiatan')
+                    ->searchable(),
+                TextColumn::make('deskripsi')
+                    ->label('Deskripsi Kegiatan')
+                    ->toggleable()
+                    ->limit(50)
+                    ->searchable(),
+                TextColumn::make('penyelenggara')
+                    ->label('Penyelenggara')
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('tanggal')
                     ->date(),
                 ImageColumn::make('gambar')
-                    ->label('Gambar'),
+                    ->label('Gambar')
+                    ->searchable()
+                    ->toggleable()
+                    ->circular(),
             ])
 
             ->filters([

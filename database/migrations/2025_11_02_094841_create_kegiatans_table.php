@@ -13,6 +13,8 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('gambar')->nullable();
+            $table->string('penyelenggara')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->date('tanggal');
             $table->string('lokasi');
             $table->timestamps();

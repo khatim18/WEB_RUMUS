@@ -26,4 +26,11 @@ class AnggotaUmkm extends Model
     {
        return $this->belongsTo(\App\Models\Kategori::class, 'kategori_id', 'id_kategori');
     }
+    public function index()
+    {
+    $umkm = AnggotaUmkm::paginate(12);
+    $totalUmkm = AnggotaUmkm::count();
+
+    return view('umkm.index', compact('umkm', 'totalUmkm'));
+    }
 }

@@ -97,7 +97,6 @@
 </div>
 </section>
 
-
 <!-- Video Profil Section -->
 <section class="py-16 bg-gray-100">
     <div class="container mx-auto px-4">

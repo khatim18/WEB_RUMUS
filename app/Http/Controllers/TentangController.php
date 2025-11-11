@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tentang;
 use App\Models\UMKM;
+use App\Models\AnggotaUmkm;
 use Illuminate\Http\Request;
 
 class TentangController extends Controller
@@ -36,7 +37,9 @@ class TentangController extends Controller
     public function anggota()
     {
         $umkm = UMKM::latest()->paginate(12);
-        return view('tentang.anggota', compact('umkm'));
+        $totalUmkm = AnggotaUmkm::count();
+        return view('tentang.anggota', compact('umkm', 'totalUmkm'));
+
     }
 
     public function struktur()

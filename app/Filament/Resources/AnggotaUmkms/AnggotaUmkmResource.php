@@ -77,7 +77,10 @@ class AnggotaUmkmResource extends Resource
 
             FileUpload::make('Foto_anggota')
                 ->label('Foto Anggota')
-                ->directory('public/anggota_umkm')
+                ->image()
+                ->disk('public')
+                ->required()
+                ->directory('anggota_umkm')
                 ->visibility('public')
                 ->helperText('Unggah foto anggota dalam format JPG atau PNG (maksimal 5MB).')
                 ->acceptedFileTypes(['image/jpeg', 'image/png'])
@@ -105,7 +108,7 @@ class AnggotaUmkmResource extends Resource
 
                 TextColumn::make('alamat')
                     ->label('Alamat')
-                    ->limit(30),
+                    ->limit(15),
 
                 TextColumn::make('kategori_usaha')
                     ->label('Kategori Usaha'),
@@ -116,9 +119,7 @@ class AnggotaUmkmResource extends Resource
 
                 ImageColumn::make('Foto_anggota')
                     ->label('Foto Anggota')
-                    ->disk('public')
-                    ->width(60)
-                    ->height(60)
+                    ->toggleable()
                     ->circular(),
             ])
             ->filters([])

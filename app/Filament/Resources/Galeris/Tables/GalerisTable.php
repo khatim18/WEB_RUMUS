@@ -20,6 +20,10 @@ class GalerisTable
                 TextColumn::make('tanggal')
                     ->date()
                     ->sortable(),
+                TextColumn::make('deskripsi')
+                    ->searchable(),
+                TextColumn::make('penyelenggara')
+                    ->searchable(),
                 TextColumn::make('gambar')
                     ->searchable(),
                 TextColumn::make('created_at')
