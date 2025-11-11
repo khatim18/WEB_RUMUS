@@ -22,6 +22,7 @@ Route::get('/kisah/{id}', [KisahController::class, 'show'])->name('kisah.show');
 
 // Galeri
 Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
+Route::get('/galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
 
 // Kegiatan
 Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');

@@ -6,7 +6,7 @@
 <section class="relative bg-gradient-to-r from-orange-500 to-orange-400 text-white py-24 overflow-hidden">
     {{-- Dekorasi Lingkaran --}}
     <div class="absolute top-[-80px] right-[-80px] w-80 h-80 bg-white opacity-25 rounded-full"></div>
-        <div class="absolute bottom-[-60px] left-[-60px] w-72 h-72 bg-white opacity-25 rounded-full"></div>
+    <div class="absolute bottom-[-60px] left-[-60px] w-72 h-72 bg-white opacity-25 rounded-full"></div>
 
     {{-- Konten Judul --}}
     <div class="container mx-auto px-6 text-center relative z-10">
