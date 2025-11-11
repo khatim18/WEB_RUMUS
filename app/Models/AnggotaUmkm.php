@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AnggotaUmkm extends Model
@@ -17,5 +18,12 @@ class AnggotaUmkm extends Model
         'email',
         'no_hp',
         'alamat',
+        'kategori_usaha',
+        'jabatan',
+        'foto_anggota',
     ];
+    public function kategori()
+    {
+       return $this->belongsTo(\App\Models\Kategori::class, 'kategori_id', 'id_kategori');
+    }
 }

@@ -3,25 +3,27 @@
 @section('title', 'Galeri RUMUS')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative h-60 bg-linear-to-r from-orange-500 to-orange-400 text-white flex flex-col justify-center items-center">
-    <h1 class="text-3xl md:text-4xl font-bold">Galeri RUMUS</h1>
-    <p class="mt-2 text-lg opacity-90">Dokumentasi Kegiatan dan Prestasi RUMUS Desa Bumi Jaya</p>
-</section>
+ <section class="relative bg-gradient-to-r from-[#F97316] to-[#fb923c] text-white py-24 overflow-hidden z-0">
+        {{-- Dekorasi Lingkaran --}}
+        <div class="absolute top-[-80px] right-[-80px] w-80 h-80 bg-white opacity-25 rounded-full"></div>
+        <div class="absolute bottom-[-60px] left-[-60px] w-72 h-72 bg-white opacity-20 rounded-full"></div>
 
-<!-- Breadcrumb -->
-<div class="bg-gray-50 py-3 text-sm px-6">
-    <div class="container mx-auto text-gray-700">
-        <a href="{{ route('home') }}" class="hover:text-orange-500">Beranda</a> /
-        <a href="{{ route('berita.index') }}" class="hover:text-orange-500">Galeri & Berita</a> /
-        <span class="font-semibold text-gray-900">Galeri RUMUS</span>
-    </div>
-</div>
+        {{-- Konten Judul --}}
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-4xl font-bold mb-3 drop-shadow-md">Galeri RUMUS</h1>
+            <p class="text-sm text-white/90">
+                <a href="{{ url('/') }}" class="hover:underline">Beranda</a> >
+                <a href="#" class="hover:underline">Galreri & Berita</a> >
+                <span class="font-semibold">Galeri RUMUS</span>
+            </p>
+            <p class="mt-2 text-lg opacity-90">Dokumentasi Kegiatan dan Prestasi RUMUS Desa Bumi Jaya</p>
+        </div>
+    </section>
 
 <!-- Content -->
 <section class="py-12">
     <div class="container mx-auto px-6">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Galeri Kegiatan RUMUS</h2>
+        <h2 class="text-2xl text-center font-semibold text-gray-800 mb-6">Galeri Kegiatan RUMUS</h2>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($galeris as $item)

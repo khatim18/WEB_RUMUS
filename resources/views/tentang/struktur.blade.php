@@ -3,21 +3,28 @@
 @section('title', 'Struktur Organisasi - RUMUS BUMI JAYA')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold orange-text">Struktur Organisasi</h1>
-        <p class="text-gray-600 mt-2">Struktur organisasi RUMUS BUMI JAYA</p>
-    </div>
+<section class="relative bg-gradient-to-r from-[#F97316] to-[#fb923c] text-white py-24 overflow-hidden z-0">
+        {{-- Dekorasi Lingkaran --}}
+        <div class="absolute top-[-80px] right-[-80px] w-80 h-80 bg-white opacity-25 rounded-full"></div>
+        <div class="absolute bottom-[-60px] left-[-60px] w-72 h-72 bg-white opacity-20 rounded-full"></div>
 
+        {{-- Konten Judul --}}
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-4xl font-bold mb-3 drop-shadow-md">STRUKTUR ORGANISASI</h1>
+            <p class="text-sm text-white/90">
+                <a href="{{ url('/') }}" class="hover:underline">Beranda</a> >
+                <a href="#" class="hover:underline">Tentang Kami</a> >
+                <span class="font-semibold">STRUKTUR ORGANISASI</span>
+            </p>
+            <p class="mx-auto mt-2 text-sm text-white/90">Periode 2023-2025</p>
+        </div>
+    </section>>
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="p-6 md:p-8">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-semibold mb-2">STRUKTUR ORGANISASI</h2>
-                <p class="text-gray-600">Periode 2023-2025</p>
-            </div>
-
             <div class="text-center mb-8">
-                <img src="{{ asset('images/placeholder/struktur.jpg') }}" alt="Struktur Organisasi" class="w-full max-w-4xl mx-auto">
+                <img src="{{ asset('images/placeholder/struktur.jpg') }}"
+                        alt="Struktur Organisasi"
+                        class="w-full max-w-4xl mx-auto">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

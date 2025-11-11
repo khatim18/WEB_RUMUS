@@ -5,7 +5,9 @@ namespace App\Filament\Resources\AnggotaUmkms\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
+use Filament\Actions\ViewAction;;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Schemas\Components\Image;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -28,7 +30,10 @@ class AnggotaUmkmsTable
                 TextColumn::make('alamat')
                     ->searchable(),
                 TextColumn::make('kategori_usaha')
+                    ->label('Kategori Usaha')
                     ->searchable(),
+                ImageColumn::make('Foto_anggota')
+                    ->label('Foto Anggota'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')

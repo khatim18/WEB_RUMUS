@@ -10,10 +10,10 @@
 
 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
     {{-- Gambar Berita --}}
-    <a href="{{ route('berita.show', ['slug' => $slug]) }}">
+    <a href="{{ route('berita.show', $slug) }}">
         <img src="{{ $gambar }}"
              alt="{{ $judul }}"
-             class="w-full h-48 object-cover">
+             class="w-full h-48 object-cover rounded-t-lg">
     </a>
 
     <div class="p-4">

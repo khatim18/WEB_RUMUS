@@ -30,7 +30,7 @@
                 Belum ada berita yang dipublikasikan.
             </div>
         @endforelse
-        
+
     </div>
     <div class="mt-8">
         {{ $berita->links() }}

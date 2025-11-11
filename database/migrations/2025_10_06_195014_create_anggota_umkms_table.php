@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('no_hp')->nullable();
             $table->string('alamat')->nullable();
+            $table->string('kategori_usaha')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->string('foto_anggota')->nullable();
             $table->timestamps();
         });
     }

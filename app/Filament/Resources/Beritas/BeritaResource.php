@@ -10,8 +10,8 @@ use Filament\Schemas\Schema;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Resource;
+use Filament\Resources\Pages;
 use Filament\Actions\DeleteAction;
-use Filament\Support\Icons\Heroicon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Forms\Components\Select;
 use Filament\Actions\DeleteBulkAction;
@@ -26,9 +26,6 @@ use App\Filament\Resources\Beritas\Pages\EditBerita;
 use App\Filament\Resources\Beritas\Pages\ViewBerita;
 use App\Filament\Resources\Beritas\Pages\ListBeritas;
 use App\Filament\Resources\Beritas\Pages\CreateBerita;
-use App\Filament\Resources\Beritas\Schemas\BeritaForm;
-use App\Filament\Resources\Beritas\Tables\BeritasTable;
-use App\Filament\Resources\Beritas\Schemas\BeritaInfolist;
 
 class BeritaResource extends Resource
 {
@@ -72,6 +69,7 @@ class BeritaResource extends Resource
             FileUpload::make('gambar')
                 ->label('Gambar')
                 ->directory('berita')
+                ->disk('public')
                 ->image(),
 
              RichEditor::make('isi_berita')
@@ -80,12 +78,6 @@ class BeritaResource extends Resource
                 ->columnSpanFull(),
         ]);
     }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return BeritaInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return $table
