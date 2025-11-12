@@ -25,7 +25,9 @@ Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
 Route::get('/galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
 
 // Kegiatan
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
+Route::get('/kegiatan/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
 
 // Produk
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
@@ -34,7 +36,8 @@ Route::get('/produk/{id_produk}', [ProdukController::class, 'show'])->name('prod
 // Tentang
 Route::get('/tentang', [TentangController::class, 'index'])->name('tentang.index');
 Route::get('/tentang/sejarah', [TentangController::class, 'sejarah'])->name('tentang.sejarah');
-Route::get('/tentang/visi-misi', [TentangController::class, 'visiMisi'])->name('tentang.visi-misi');Route::get('/tentang/tujuan', [TentangController::class, 'tujuan'])->name('tentang.tujuan');
+Route::get('/tentang/visi-misi', [TentangController::class, 'visiMisi'])->name('tentang.visi-misi');
+Route::get('/tentang/tujuan', [TentangController::class, 'tujuan'])->name('tentang.tujuan');
 Route::get('/tentang/anggota', [TentangController::class, 'anggota'])->name('tentang.anggota');
 Route::get('/tentang/struktur', [TentangController::class, 'struktur'])->name('tentang.struktur');
 

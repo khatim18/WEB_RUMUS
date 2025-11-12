@@ -3,38 +3,24 @@
 @section('title', 'Galeri Kegiatan RUMUS')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="mb-8">
-        <nav class="flex" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-gray-900">
-                        Beranda
-                    </a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                        <a href="#" class="text-gray-700 hover:text-gray-900">Galeri & Berita</a>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <svg class="w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                        </svg>
-                        <span class="text-orange-primary">Kegiatan RUMUS</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
 
-        <h1 class="text-3xl font-bold orange-text mt-4">Galeri Kegiatan RUMUS</h1>
-        <p class="text-gray-600 mt-2">Dokumentasi kegiatan yang telah dilaksanakan oleh RUMUS BUMI JAYA</p>
+<section class="relative bg-gradient-to-r from-[#F97316] to-[#fb923c] text-white py-24 overflow-hidden z-0">
+    <div class="absolute top-[-80px] right-[-80px] w-80 h-80 bg-white opacity-25 rounded-full"></div>
+    <div class="absolute bottom-[-60px] left-[-60px] w-72 h-72 bg-white opacity-25 rounded-full"></div>
+
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-lg">Galeri Kegiatan RUMUS</h1>
+        <p class="text-sm text-white/90">
+            <a href="{{ url('/') }}" class="hover:underline">Beranda</a> >
+            <a href="#" class="hover:underline">Galeri & Berita</a> >
+            <span class="font-semibold">Galeri Kegiatan RUMUS</span>
+        </p>
+        <p class="mt-3 text-lg md:text-xl opacity-90 max-w-2xl mx-auto leading-relaxed">
+            Dokumentasi Kegiatan dan Prestasi RUMUS Desa Bumi Jaya Menginspirasi, Mengembangkan, dan Mengedukasi Masyarakat Desa.
+        </p>
     </div>
-
+</section>
+<div class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($kegiatan as $item)
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">

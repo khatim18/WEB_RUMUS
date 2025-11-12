@@ -17,24 +17,37 @@
 </section>
 
 <!-- Kegiatan -->
-<section class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8 orange-text">Kegiatan Terkini</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @foreach($kegiatans as $item)
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center">
-            @foreach($kegiatans as $item)
-                <x-card-kegiatan :item="$item" />
-            @endforeach
-            </div>
-            <div class="text-center mt-10">
-            <a href="{{ route('kegiatan.index') }}"
-            class="bg-orange-primary text-white px-8 py-3 rounded-xl font-bold text-lg hover:bg-orange-secondary transition">
-            Lihat Semua
+<section id="kegiatan-terkini" class="py-10 bg-gray-100 text-center">
+    <h2 class="text-2xl font-bold text-orange-600 mb-6">Kegiatan Terkini</h2>
+
+    @if ($kegiatan_terkini)
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md p-6">
+            <img src="{{ asset('storage/' . $kegiatan_terkini->foto_kegiatan) }}"
+                 alt="{{ $kegiatan_terkini->judul }}"
+                 class="w-full rounded-lg mb-4">
+
+            <h3 class="text-xl font-semibold mb-2">{{ $kegiatan_terkini->judul }}</h3>
+            <p class="text-gray-600 text-sm mb-2">
+                {{ \Carbon\Carbon::parse($kegiatan_terkini->tanggal_kegiatan)->translatedFormat('d F Y') }}
+            </p>
+            <p class="text-gray-700 mb-4">
+                {{ Str::limit($kegiatan_terkini->deskripsi, 150) }}
+            </p>
+
+            <a href="{{ route('galeri.show', $kegiatan_terkini->id) }}"
+               class="inline-block bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
+                Lihat Detail
             </a>
-            @endforeach
         </div>
-        </div>
+    @else
+        <p class="text-gray-600">Belum ada kegiatan yang ditambahkan.</p>
+    @endif
+
+    <div class="mt-6">
+        <a href="{{ route('galeri.index') }}"
+           class="inline-block bg-gray-200 text-orange-600 font-semibold px-5 py-2 rounded-lg hover:bg-gray-300 transition">
+            Kegiatan Lainnya →
+        </a>
     </div>
 </section>
 

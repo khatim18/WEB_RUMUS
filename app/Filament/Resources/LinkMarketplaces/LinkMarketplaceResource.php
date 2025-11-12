@@ -73,6 +73,7 @@ class LinkMarketplaceResource extends Resource
             Forms\Components\FileUpload::make('icon')
                 ->label('Ikon Marketplace (tidak disimpan)')
                 ->image()
+                ->visability('public')
                 ->directory('marketplace-icons')
                 ->maxSize(1024)
                 ->helperText('Hanya untuk tampilan, tidak disimpan ke database.')
